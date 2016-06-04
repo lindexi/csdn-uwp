@@ -1,0 +1,140 @@
+﻿<Page
+    x:Class="csdn.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:csdn"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox Margin="10,10,10,10" Header="博客地址" PlaceholderText="http://blog.csdn.net/lindexi_gd" Text="{x:Bind view.PostCsdn.Url,Mode=TwoWay}"></TextBox>
+            <Button Grid.Column="1" Margin="10,10,10,10" Content="确定" Click="{x:Bind view.PostCsdn.Swoop}"></Button>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--文章总数-->
+            <Grid>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="文章总数"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Bind view.PostCsdn.TotalPost,Mode=OneWay}"></TextBlock>
+
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <!--原创-->
+            <Grid Grid.Row="0" Grid.Column="1">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="原创"></TextBlock>
+                    <TextBlock Text="{x:Bind view.PostCsdn.Original,Mode=OneWay}"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <!--翻译-->
+            <Grid Grid.Row="0" Grid.Column="2">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="翻译"></TextBlock>
+                    <TextBlock Text="{x:Bind view.PostCsdn.Translation,Mode=OneWay}"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <!--转载-->
+            <Grid Grid.Row="0" Grid.Column="3">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="转载"></TextBlock>
+                    <TextBlock Text="{x:Bind view.PostCsdn.Reprint,Mode=OneWay}"></TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <!--总访问-->
+            <Grid Grid.Row="1" Grid.Column="0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="总访问"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="10,1,10,1" Text="{x:Bind view.PostCsdn.TotalView,Mode=OneWay}"></TextBlock>
+                        <Image Source="Assets/Arrow_big_two_way_up_down_125px_1197969_easyicon.net.png" Width="10" Height="10"></Image>
+                        <TextBlock Text="{x:Bind view.PostCsdn.AddView,Mode=OneWay}"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <!--积分-->
+            <Grid Grid.Row="1" Grid.Column="1">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="积分"></TextBlock>
+                    <TextBlock Text="{x:Bind view.PostCsdn.Integral,Mode=OneWay}"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <!--排名-->
+            <!--<Grid Grid.Row="1" Grid.Column="2">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="排名"></TextBlock>
+                    <TextBlock Text="{x:Bind view.PostCsdn.}"></TextBlock>
+                </StackPanel>
+            </Grid>-->
+        </Grid>
+        <Grid Grid.Row="2">
+            <ListView ItemsSource="{x:Bind view.PostCsdn.PostCollection,Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Post">
+                        <Grid>
+                            <!--<Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32*"></ColumnDefinition>
+                                <ColumnDefinition Width="200*"></ColumnDefinition>
+                                <ColumnDefinition Width="32*"></ColumnDefinition>
+                                <ColumnDefinition Width="32*"></ColumnDefinition>
+                                <ColumnDefinition Width="32*"></ColumnDefinition>
+                                <ColumnDefinition Width="32*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Path=Original}"></TextBlock>
+                            <TextBlock Grid.Column="1" Text="{Binding Path=Title}"></TextBlock>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                <TextBlock Text="发表时间"></TextBlock>
+                                <TextBlock Text="{Binding Path=Time}"></TextBlock>
+                            </StackPanel>
+                            <TextBlock Grid.Column="3" Text="{Binding Path=LinkView}"></TextBlock>
+                            <TextBlock Grid.Column="4" Text="{Binding Path=AddView}"></TextBlock>-->
+                            <Grid Margin="10,10,10,10">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="10,1,10,1" Text="{Binding Path=Original}"></TextBlock>
+                                        <TextBlock Text="{Binding Path=Title}"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="发表时间"></TextBlock>
+                                        <TextBlock Text="{Binding Path=Time}"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="阅读:"></TextBlock>
+                                        <TextBlock Margin="10,1,10,1" Text="{Binding Path=LinkView}"></TextBlock>
+                                        <Image Source="Assets/Arrow_big_two_way_up_down_125px_1197969_easyicon.net.png" Width="10" Height="10"></Image>
+                                        <TextBlock Text="{Binding Path=AddView}"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

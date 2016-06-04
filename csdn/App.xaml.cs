@@ -34,6 +34,22 @@ namespace csdn
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.Resuming += OnResuming;
+        }
+
+        private void OnResuming(object sender, object e)
+        {
+            track();
+        }
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
+            track();
+        }
+
+        private async void track()
+        {
+            await JYAnalyticsUniversal.JYAnalytics.StartTrackAsync("38b1209d561991e4523df2c8415a98d7");
         }
 
         /// <summary>
@@ -81,6 +97,7 @@ namespace csdn
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
+            track();
         }
 
         /// <summary>
@@ -100,10 +117,11 @@ namespace csdn
         /// </summary>
         /// <param name="sender">挂起的请求的源。</param>
         /// <param name="e">有关挂起请求的详细信息。</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: 保存应用程序状态并停止任何后台活动
+            await JYAnalyticsUniversal.JYAnalytics.EndTrackAsync();
             deferral.Complete();
         }
     }

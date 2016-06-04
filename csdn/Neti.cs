@@ -1,5 +1,5 @@
 ﻿// lindexi
-// 9:55
+// 21:56
 
 using System;
 using System.Collections.Generic;
@@ -173,6 +173,40 @@ namespace csdn
             HttpGet();
         }
 
+        /// <summary>
+        ///     阅读排序
+        /// </summary>
+        public void SortView()
+        {
+            SortDispatcher((a, b) =>
+            {
+                int linkViewa = int.Parse(a.LinkView);
+                int linkViewb = int.Parse(b.LinkView);
+                return linkViewa.CompareTo(linkViewb)*-1;
+            });
+        }
+
+        /// <summary>
+        ///     增加排序
+        /// </summary>
+        public void SortAdd()
+        {
+            SortDispatcher((a, b) => a.AddView.CompareTo(b.AddView) * -1);
+        }
+
+        /// <summary>
+        ///     发布时间
+        /// </summary>
+        public void SortTime()
+        {
+            SortDispatcher((a, b) =>
+            {
+                DateTime timea = DateTime.Parse(a.Time);
+                DateTime timeb = DateTime.Parse(b.Time);
+                return timea.CompareTo(timeb) * -1;
+            });
+        }
+
         private string _addView;
         private string _integral;
 
@@ -184,6 +218,25 @@ namespace csdn
         private string _totalPost;
         private string _totalView;
         private string _translation;
+
+        private void SortDispatcher(Comparison<Post> compariso)
+        {
+            new Task(async () =>
+            {
+                var postSort = PostCollection.ToList();
+                postSort.Sort(compariso);
+
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () =>
+                    {
+                        PostCollection.Clear();
+                        foreach (var temp in postSort)
+                        {
+                            PostCollection.Add(temp);
+                        }
+                    });
+            }).Start();
+        }
 
         private void HttpGet()
         {

@@ -1,5 +1,5 @@
 ﻿// lindexi
-// 21:56
+// 19:47
 
 using System;
 using System.Collections.Generic;
@@ -13,8 +13,11 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+using Windows.Web.Http.Filters;
+using Newtonsoft.Json;
 
 namespace csdn
 {
@@ -33,6 +36,10 @@ namespace csdn
             TotalPost = i;
             TotalView = i;
             Integral = i;
+
+            _object = new object();
+            _intervalTime = 36;
+            new Task(IntervalSwoop).Start();
         }
 
         /// <summary>
@@ -157,6 +164,7 @@ namespace csdn
             }
         }
 
+
         /// <summary>
         ///     抓取
         /// </summary>
@@ -173,6 +181,15 @@ namespace csdn
             HttpGet();
         }
 
+        public void View()
+        {
+            //View(0);
+            string url = "http://blog.csdn.net/lindexi_gd/article/details/51683015";
+            View(url);
+        }
+
+        private Random _ran = new Random();
+
         /// <summary>
         ///     阅读排序
         /// </summary>
@@ -182,7 +199,7 @@ namespace csdn
             {
                 int linkViewa = int.Parse(a.LinkView);
                 int linkViewb = int.Parse(b.LinkView);
-                return linkViewa.CompareTo(linkViewb)*-1;
+                return linkViewa.CompareTo(linkViewb) * -1;
             });
         }
 
@@ -210,7 +227,12 @@ namespace csdn
         private string _addView;
         private string _integral;
 
+
+        private long _intervalTime;
+
         private int _maxPage;
+
+        private object _object;
 
         private string _original;
         private int _page;
@@ -218,6 +240,82 @@ namespace csdn
         private string _totalPost;
         private string _totalView;
         private string _translation;
+
+        private void View(int i)
+        {
+            string url = "http://blog.csdn.net";
+            if (i >= PostCollection.Count)
+            {
+                i = 0;
+            }
+            var temp = PostCollection[i];
+            url = url + temp.Url;
+            WebRequest request = WebRequest.Create(url);
+            request.Method = "GET";
+            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
+            request.BeginGetResponse(result =>
+            {
+                HttpWebRequest http = (HttpWebRequest)result.AsyncState;
+                WebResponse webResponse = http.EndGetResponse(result);
+                webResponse.Dispose();
+                i++;
+                View(i);
+            }, request);
+        }
+
+        private void View(string url)
+        {
+            try
+            {
+                WebRequest request = WebRequest.Create(url);
+                request.Method = "GET";
+                HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+                filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
+                request.BeginGetResponse(result =>
+                {
+                    HttpWebRequest http = (HttpWebRequest)result.AsyncState;
+                    WebResponse webResponse = http.EndGetResponse(result);
+                    webResponse.GetResponseStream().ReadByte();
+                    webResponse.Dispose();
+                    Task.Delay(_ran.Next(1000, 10000)).Wait();
+                    View(url);
+                }, request);
+            }
+            catch 
+            {
+                Task.Delay(_ran.Next(1000, 10000)).Wait();
+                View(url);
+            }
+        }
+
+        /// <summary>
+        ///     间隔爬博客
+        /// </summary>
+        private void IntervalSwoop()
+        {
+            while (true)
+            {
+                Task.Delay(100000).Wait();
+                if (_object == null)
+                {
+                    _object = new object();
+                }
+                lock (_object)
+                {
+                    _intervalTime--;
+                }
+                if (_intervalTime == 0)
+                {
+                    _intervalTime = 36;
+                    Swoop();
+                }
+                if (_intervalTime < 0)
+                {
+                    return;
+                }
+            }
+        }
 
         private void SortDispatcher(Comparison<Post> compariso)
         {
@@ -229,9 +327,12 @@ namespace csdn
                 await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                     () =>
                     {
+                        int n = 0;
                         PostCollection.Clear();
                         foreach (var temp in postSort)
                         {
+                            n++;
+                            temp.N = n;
                             PostCollection.Add(temp);
                         }
                     });
@@ -286,7 +387,7 @@ namespace csdn
 
         private void ResponseCallBack(IAsyncResult result)
         {
-            HttpWebRequest http = (HttpWebRequest) result.AsyncState;
+            HttpWebRequest http = (HttpWebRequest)result.AsyncState;
             WebResponse webResponse = http.EndGetResponse(result);
             using (Stream stream = webResponse.GetResponseStream())
             {
@@ -494,4 +595,5 @@ namespace csdn
             }
         }
     }
+
 }

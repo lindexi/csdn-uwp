@@ -196,3 +196,8 @@ ModelManifest.xml
 /data
 /不使用/csdn
 /baozitongregex.exe
+/csdn/BundleArtifacts
+/csdn/_pkginfo.txt
+/csdn/_scale-100.appx
+/csdn/_scale-125.appx
+*.appx

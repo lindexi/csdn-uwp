@@ -23,6 +23,8 @@
 
 我们还需要类Post存放我们的博客
 
+
+
 ```
     public class Post : NotifyProperty
     {

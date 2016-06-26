@@ -1,9 +1,11 @@
 ﻿// lindexi
-// 9:56
+// 15:34
 
 using System;
 using System.IO;
+using Windows.ApplicationModel;
 using Windows.Storage;
+using Windows.UI;
 using Newtonsoft.Json;
 
 namespace csdn
@@ -14,36 +16,6 @@ namespace csdn
         {
             App.Current.Suspending += OnSuspending;
             Read();
-        }
-
-        private async void Read()
-        {
-            try
-            {
-                var file = await ApplicationData.Current.LocalFolder.GetFileAsync("data");
-                var json = JsonSerializer.Create();
-                using (TextReader stream = new StreamReader(await file.OpenStreamForReadAsync()))
-                {
-                    PostCsdn = json.Deserialize<Neti>(new JsonTextReader(stream));
-                }
-            }
-            catch (Exception)
-            {
-                PostCsdn=new Neti();
-            }
-        }
-
-        private async void OnSuspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
-        {
-            var deferral = e.SuspendingOperation.GetDeferral();
-            var json = JsonSerializer.Create();
-            //json.Serialize();
-            var file =await ApplicationData.Current.LocalFolder.CreateFileAsync("data",CreationCollisionOption.ReplaceExisting);
-            using (TextWriter stream=new StreamWriter(await file.OpenStreamForWriteAsync()))
-            {
-                json.Serialize(stream,PostCsdn);
-            }
-            deferral.Complete();
         }
 
         public Neti PostCsdn
@@ -69,5 +41,37 @@ namespace csdn
         }
 
         private string _url;
+
+        private async void Read()
+        {
+            try
+            {
+                var file = await ApplicationData.Current.LocalFolder.GetFileAsync("data");
+                var json = JsonSerializer.Create();
+                using (TextReader stream = new StreamReader(await file.OpenStreamForReadAsync()))
+                {
+                    PostCsdn = json.Deserialize<Neti>(new JsonTextReader(stream));
+                }
+            }
+            catch (Exception)
+            {
+                PostCsdn = new Neti();
+            }
+        }
+
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
+        {
+            var deferral = e.SuspendingOperation.GetDeferral();
+            var json = JsonSerializer.Create();
+            //json.Serialize();
+            var file =
+                await
+                    ApplicationData.Current.LocalFolder.CreateFileAsync("data", CreationCollisionOption.ReplaceExisting);
+            using (TextWriter stream = new StreamWriter(await file.OpenStreamForWriteAsync()))
+            {
+                json.Serialize(stream, PostCsdn);
+            }
+            deferral.Complete();
+        }
     }
 }

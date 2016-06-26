@@ -1,5 +1,5 @@
 ﻿// lindexi
-// 9:56
+// 10:56
 
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,19 @@ namespace csdn
     {
         public Post()
         {
+        }
+
+        public int N
+        {
+            set
+            {
+                _n = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _n;
+            }
         }
 
         /// <summary>
@@ -119,6 +132,8 @@ namespace csdn
         private int _addView;
 
         private string _linkView;
+
+        private int _n;
         private string _original;
     }
 }

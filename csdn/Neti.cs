@@ -1,5 +1,5 @@
 ﻿// lindexi
-// 19:47
+// 10:57
 
 using System;
 using System.Collections.Generic;
@@ -188,8 +188,6 @@ namespace csdn
             View(url);
         }
 
-        private Random _ran = new Random();
-
         /// <summary>
         ///     阅读排序
         /// </summary>
@@ -199,7 +197,7 @@ namespace csdn
             {
                 int linkViewa = int.Parse(a.LinkView);
                 int linkViewb = int.Parse(b.LinkView);
-                return linkViewa.CompareTo(linkViewb) * -1;
+                return linkViewa.CompareTo(linkViewb)*-1;
             });
         }
 
@@ -208,7 +206,7 @@ namespace csdn
         /// </summary>
         public void SortAdd()
         {
-            SortDispatcher((a, b) => a.AddView.CompareTo(b.AddView) * -1);
+            SortDispatcher((a, b) => a.AddView.CompareTo(b.AddView)*-1);
         }
 
         /// <summary>
@@ -220,7 +218,7 @@ namespace csdn
             {
                 DateTime timea = DateTime.Parse(a.Time);
                 DateTime timeb = DateTime.Parse(b.Time);
-                return timea.CompareTo(timeb) * -1;
+                return timea.CompareTo(timeb)*-1;
             });
         }
 
@@ -236,6 +234,8 @@ namespace csdn
 
         private string _original;
         private int _page;
+
+        private Random _ran = new Random();
         private string _reprint;
         private string _totalPost;
         private string _totalView;
@@ -256,7 +256,7 @@ namespace csdn
             filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
             request.BeginGetResponse(result =>
             {
-                HttpWebRequest http = (HttpWebRequest)result.AsyncState;
+                HttpWebRequest http = (HttpWebRequest) result.AsyncState;
                 WebResponse webResponse = http.EndGetResponse(result);
                 webResponse.Dispose();
                 i++;
@@ -274,7 +274,7 @@ namespace csdn
                 filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
                 request.BeginGetResponse(result =>
                 {
-                    HttpWebRequest http = (HttpWebRequest)result.AsyncState;
+                    HttpWebRequest http = (HttpWebRequest) result.AsyncState;
                     WebResponse webResponse = http.EndGetResponse(result);
                     webResponse.GetResponseStream().ReadByte();
                     webResponse.Dispose();
@@ -282,7 +282,7 @@ namespace csdn
                     View(url);
                 }, request);
             }
-            catch 
+            catch
             {
                 Task.Delay(_ran.Next(1000, 10000)).Wait();
                 View(url);
@@ -387,7 +387,7 @@ namespace csdn
 
         private void ResponseCallBack(IAsyncResult result)
         {
-            HttpWebRequest http = (HttpWebRequest)result.AsyncState;
+            HttpWebRequest http = (HttpWebRequest) result.AsyncState;
             WebResponse webResponse = http.EndGetResponse(result);
             using (Stream stream = webResponse.GetResponseStream())
             {
@@ -595,5 +595,4 @@ namespace csdn
             }
         }
     }
-
 }

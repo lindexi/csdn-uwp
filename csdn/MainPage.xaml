@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
             <TextBox Margin="10,10,10,10" Header="博客地址" PlaceholderText="http://blog.csdn.net/lindexi_gd" Text="{x:Bind view.PostCsdn.Url,Mode=TwoWay}"></TextBox>
             <Button Grid.Column="1" Margin="10,10,10,10" Content="确定" Click="{x:Bind view.PostCsdn.Swoop}"></Button>
-            <Button Grid.Column="2" Margin="10,10,10,10" Content="刷访问量" Click="{x:Bind view.PostCsdn.View}"></Button>
+            <!--<Button Grid.Column="2" Margin="10,10,10,10" Content="刷访问量" Click="{x:Bind view.PostCsdn.View}"></Button>-->
         </Grid>
 
         <Grid Grid.Row="1">

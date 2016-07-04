@@ -364,8 +364,8 @@
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
-    <MainPackageIdentityName>43179.winMarkdown</MainPackageIdentityName>
     <MainPackageIdentityName>43179.5635982EE69E1</MainPackageIdentityName>
+    <MainPackageIdentityName>43179.winMarkdown</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH4X1H0" />
+  <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9NBLGGH4X1H0" />
 </StoreAssociation>

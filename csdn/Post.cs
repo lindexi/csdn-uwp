@@ -109,6 +109,17 @@ namespace csdn
         public void ClonePost(Post post)
         {
             int postLinkView = int.Parse(post.LinkView);
+            foreach (var temp in ScrutinieCollection)
+            {
+                if (temp.Time.Year == post.LastTime.Year &&
+                    temp.Time.Month == post.LastTime.Month &&
+                    temp.Time.Day == post.LastTime.Day - 1)
+                {
+                    postLinkView = int.Parse(temp.LinkView);
+                    break;
+                }
+            }
+
             int linkView = int.Parse(LinkView);
             if (postLinkView >= linkView)
             {
@@ -116,7 +127,7 @@ namespace csdn
             }
             else
             {
-                throw new FormatException();
+                //throw new FormatException();
             }
 
             LinkView = post.LinkView;

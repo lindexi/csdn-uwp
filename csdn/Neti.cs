@@ -13,6 +13,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
+using Windows.Networking.Connectivity;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -39,7 +40,13 @@ namespace csdn
 
             _object = new object();
             _intervalTime = 36;
-            new Task(IntervalSwoop).Start();
+
+
+
+            if (NetworkInformation.GetInternetConnectionProfile()?.IsWlanConnectionProfile == true)
+            {
+                new Task(IntervalSwoop).Start();
+            }
         }
 
         /// <summary>
@@ -179,6 +186,21 @@ namespace csdn
             _maxPage = -1;
             _page = -1;
             HttpGet();
+
+            //ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
+            //if (profile?.IsWlanConnectionProfile==true)
+            //{
+            //    View();
+            //}
+            if (Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
+            {
+                View(0);
+            }
+            else if(NetworkInformation.GetInternetConnectionProfile()?.IsWlanConnectionProfile == true)
+            {
+                View(0);
+            }
+
         }
 
         public void View()
@@ -241,13 +263,22 @@ namespace csdn
         private string _totalView;
         private string _translation;
 
-        private void View(int i)
+        private async void View(int i)
         {
+            //函数可以刷访问，可以测试我们软件，你可以使用函数来刷博客比排名1多
+
             string url = "http://blog.csdn.net";
+            if (PostCollection.Count == 0)
+            {
+                await Task.Delay(1000);
+                View(i);
+                return;
+            }
             if (i >= PostCollection.Count)
             {
-                i = 0;
+                return;
             }
+
             var temp = PostCollection[i];
             url = url + temp.Url;
             WebRequest request = WebRequest.Create(url);

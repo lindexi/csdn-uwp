@@ -266,7 +266,6 @@ namespace csdn
         private async void View(int i)
         {
             //函数可以刷访问，可以测试我们软件，你可以使用函数来刷博客比排名1多
-
             string url = "http://blog.csdn.net";
             if (PostCollection.Count == 0)
             {

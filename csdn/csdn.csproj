@@ -16,11 +16,12 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>csdn_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>2E267B42CB05557BD96D59C8B68BF368E1444BB3</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>csdn_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>4195608ED325EC9483C86A35EFBD11A5FBD21F20</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <AppxPackageDir>E:\程序\ethylene156\csdn\</AppxPackageDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -94,6 +95,7 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="csdn.snk" />
+    <None Include="csdn_StoreKey.pfx" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>

@@ -24,7 +24,14 @@ namespace csdn.View
     {
         public CsdnProgressPage()
         {
+            View=new ViewModel.ViewModel();
             this.InitializeComponent();
+        }
+
+        private ViewModel.ViewModel View
+        {
+            set;
+            get;
         }
     }
 }

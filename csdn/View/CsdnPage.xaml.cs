@@ -24,7 +24,9 @@ namespace csdn.View
     {
         public CsdnPage()
         {
+           
             this.InitializeComponent();
         }
+     
     }
 }

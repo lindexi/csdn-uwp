@@ -21,7 +21,7 @@
 
         <Style x:Key="SplitButton" TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
         </Style>
 
     </Page.Resources>
@@ -58,13 +58,12 @@
                                 </Button.Content>
                             </Button>
                             
-                            <Button Style="{StaticResource SplitButton}">
+                            <Button Style="{StaticResource SplitButton}"
+                                    Click="{x:Bind View.NagivatePost}">
                                 <Button.Content>
                                     <StackPanel Style="{StaticResource SplitStackPanel}">
-                                        <TextBlock Style="{StaticResource SplitFe}" Text="&#xE908;">
-                                            
-                                        </TextBlock>
-                                        <TextBlock Text="博客"></TextBlock>
+                                        <TextBlock Style="{StaticResource SplitFe}" Text="&#xE908;" />
+                                        <TextBlock Text="博客" />
                                     </StackPanel>
                                 </Button.Content>
                             </Button>
@@ -82,18 +81,16 @@
                                             <TextBlock Text="i"></TextBlock>
                                         </Grid>-->
                                         <TextBlock Style="{StaticResource SplitFe}"
-                                                   Text="&#xE783;"></TextBlock>
-                                        <TextBlock Text="关于"></TextBlock>
+                                                   Text="&#xE783;" />
+                                        <TextBlock Text="关于" />
                                     </StackPanel>
                                 </Button.Content>
                             </Button>
                             <Button Style="{StaticResource SplitButton}">
                                 <Button.Content>
                                     <StackPanel Style="{StaticResource SplitStackPanel}">
-                                        <TextBlock Style="{StaticResource SplitFe}" Text="&#xE713;">
-                                            
-                                        </TextBlock>
-                                        <TextBlock Text="设置"></TextBlock>
+                                        <TextBlock Style="{StaticResource SplitFe}" Text="&#xE713;" />
+                                        <TextBlock Text="设置" />
                                     </StackPanel>
                                 </Button.Content>
                             </Button>
@@ -102,7 +99,7 @@
                 </SplitView.Pane>
                 <SplitView.Content>
                     <Grid>
-                        <Frame />
+                        <Frame x:Name="frame"/>
                     </Grid>
                 </SplitView.Content>
             </SplitView>

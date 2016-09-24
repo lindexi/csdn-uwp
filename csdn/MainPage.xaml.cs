@@ -25,7 +25,7 @@ namespace csdn
         private ViewModel.ViewModel view;
         public MainPage()
         {
-            view=new ViewModel.ViewModel();
+            //view=new ViewModel.ViewModel();
             this.InitializeComponent();
         }
     }

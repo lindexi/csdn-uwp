@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Windows.ApplicationModel;
 using Windows.Storage;
+using Windows.UI.Xaml;
 using Newtonsoft.Json;
 
 namespace csdn.ViewModel
@@ -13,8 +14,13 @@ namespace csdn.ViewModel
     {
         public ViewModel()
         {
-            App.Current.Suspending += OnSuspending;
+            Application.Current.Suspending += OnSuspending;
             Read();
+        }
+
+        ~ViewModel()
+        {
+            Application.Current.Suspending -= OnSuspending;
         }
 
         public Neti PostCsdn

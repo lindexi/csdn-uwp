@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using JYAnalyticsUniversal;
 
 namespace csdn
 {
@@ -35,6 +36,12 @@ namespace csdn
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             this.Resuming += OnResuming;
+            UnhandledException += CsdnUnhandledException;
+        }
+
+        private void CsdnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
         }
 
         private void OnResuming(object sender, object e)
@@ -49,7 +56,15 @@ namespace csdn
 
         private async void track()
         {
-            await JYAnalyticsUniversal.JYAnalytics.StartTrackAsync("38b1209d561991e4523df2c8415a98d7");
+            try
+            {
+                await JYAnalytics.StartTrackAsync("38b1209d561991e4523df2c8415a98d7");
+
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace csdn.ViewModel
 {
-    class HgeekPost:NotifyProperty
+    class HgeekPost : NotifyProperty
     {
         /// <summary>
         /// 跳转到博客

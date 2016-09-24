@@ -22,10 +22,8 @@ namespace csdn
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private ViewModel.ViewModel view;
         public MainPage()
         {
-            //view=new ViewModel.ViewModel();
             this.InitializeComponent();
         }
     }

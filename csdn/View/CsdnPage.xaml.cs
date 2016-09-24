@@ -1,7 +1,4 @@
-﻿// lindexi
-// 15:46
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 namespace csdn.View
 {
     /// <summary>
-    ///     可用于自身或导航至 Frame 内部的空白页。
+    /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
     public sealed partial class CsdnPage : Page
     {

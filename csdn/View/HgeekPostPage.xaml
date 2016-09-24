@@ -57,7 +57,7 @@
                                     </Grid>
                                 </Button.Content>
                             </Button>
-                            
+
                             <Button Style="{StaticResource SplitButton}"
                                     Click="{x:Bind View.NagivatePost}">
                                 <Button.Content>
@@ -72,7 +72,7 @@
                             <Button Style="{StaticResource SplitButton}">
                                 <Button.Content>
                                     <StackPanel Style="{StaticResource SplitStackPanel}">
-                                       <!--<Grid>
+                                        <!--<Grid>
                                             <Ellipse Stroke="Black" StrokeThickness="1" 
                                                      Width="{StaticResource SplitWidth}"
                                                      Height="{StaticResource SplitWidth}">

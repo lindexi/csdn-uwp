@@ -5,10 +5,9 @@ using System;
 using System.IO;
 using Windows.ApplicationModel;
 using Windows.Storage;
-using Windows.UI;
 using Newtonsoft.Json;
 
-namespace csdn
+namespace csdn.ViewModel
 {
     public class ViewModel : NotifyProperty
     {

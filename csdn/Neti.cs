@@ -18,6 +18,7 @@ using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.Web.Http.Filters;
+using csdn.ViewModel;
 using Newtonsoft.Json;
 
 namespace csdn

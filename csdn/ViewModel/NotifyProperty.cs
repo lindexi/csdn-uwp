@@ -7,9 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
 
-namespace csdn
+namespace csdn.ViewModel
 {
     /// <summary>
     ///     提供继承通知UI改变值

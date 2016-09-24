@@ -106,13 +106,20 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Neti.cs" />
-    <Compile Include="NotifyProperty.cs" />
+    <Compile Include="ViewModel\NotifyProperty.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scrutiny.cs" />
-    <Compile Include="viewModel.cs" />
+    <Compile Include="ViewModel\viewModel.cs" />
+    <Compile Include="ViewModel\HgeekPost.cs" />
     <Compile Include="View\CsdnPage.xaml.cs">
       <DependentUpon>CsdnPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CsdnProgressPage.xaml.cs">
+      <DependentUpon>CsdnProgressPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HgeekPostPage.xaml.cs">
+      <DependentUpon>HgeekPostPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +193,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\CsdnPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CsdnProgressPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HgeekPostPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

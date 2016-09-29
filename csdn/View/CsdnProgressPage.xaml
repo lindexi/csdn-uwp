@@ -12,13 +12,35 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000">
+
+                        </AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="InteresRoller.Visibility"
+                                Value="Visible">
+
+                        </Setter>
+
+                        <Setter Target="lengthGrid.Visibility"
+                                Value="Collapsed" />
+                        <Setter Target="wrapGrid.Visibility"
+                                Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="600" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="InteresRoller.Visibility"
+                                Value="Collapsed">
+
+                        </Setter>
                         <Setter Target="lengthGrid.Visibility"
-                                    Value="Visible" />
+                                Value="Visible" />
                         <Setter Target="wrapGrid.Visibility"
-                                    Value="Collapsed" />
+                                Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -27,15 +49,19 @@
 
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="InteresRoller.Visibility"
+                                Value="Collapsed">
+
+                        </Setter>
                         <Setter Target="lengthGrid.Visibility"
-                                    Value="Collapsed" />
+                                Value="Collapsed" />
                         <Setter Target="wrapGrid.Visibility"
-                                    Value="Visible" />
+                                Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid>
+        <Grid Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -205,6 +231,100 @@
                                     </StackPanel>
                                     <TextBlock Grid.Column="3" Text="{Binding Path=LinkView}" />
                                     <TextBlock Grid.Column="4" Text="{Binding Path=AddView}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <Grid x:Name="InteresRoller">
+                    <ListView ItemsSource="{x:Bind View.PostCsdn.PostCollection,Mode=OneWay}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Stretch" />
+                                <Setter Property="VerticalContentAlignment"
+                                        Value="Stretch"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.Resources>
+                            <!--<x:Double x:Key="LeftListWidth">100</x:Double>-->
+                            <GridLength x:Key="LeftListWidth" >100</GridLength>
+                            <x:Double x:Key="RectangleWidth">6</x:Double>
+                            <SolidColorBrush x:Key="RectangleColor" Color="#FFDA3E3E"></SolidColorBrush>
+                            <!--<SolidColorBrush x:Key="VerticalRectangleColor"  ></SolidColorBrush>-->
+                            <x:Double x:Key="EllipseWidth">30</x:Double>
+                        </ListView.Resources>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="view:Post">
+                                <Grid Margin="0,0,0,0" Padding="0,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource LeftListWidth}"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Margin="0,0,0,0">
+                                        <Rectangle Margin="0,0,0,0"
+                                                   Width="{StaticResource RectangleWidth}"
+                                                   Fill="{StaticResource RectangleColor}" 
+                                                   VerticalAlignment="Stretch"
+                                                   HorizontalAlignment="Center"></Rectangle>
+                                        <Grid >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle Grid.Column="1"
+                                                       Fill="{StaticResource RectangleColor}"
+                                                       Height="{StaticResource RectangleWidth}"></Rectangle>
+                                        </Grid>
+                                        <Grid Width="{StaticResource EllipseWidth}" Height="{StaticResource EllipseWidth}">
+                                            <Ellipse Stroke="{StaticResource RectangleColor}" StrokeThickness="6"
+                                                     Fill="White"></Ellipse>
+                                            <Ellipse Width="10" Height="10"
+                                                     Fill="{StaticResource RectangleColor}"></Ellipse>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <Border Margin="0,10,10,10"
+                                                BorderBrush="{StaticResource RectangleColor}"
+                                                BorderThickness="5">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                        <ColumnDefinition></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="{x:Bind Original}"></TextBlock>
+                                                    <TextBlock Grid.Column="1" Margin="10,0,0,1"
+                                                               Text="{x:Bind Title}">
+                                                    </TextBlock>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <Grid>
+                                                        <TextBlock Text="{x:Bind Time}"></TextBlock>
+                                                        <TextBlock Text="{x:Bind LinkView}"
+                                                                   FontSize="15"
+                                                                   HorizontalAlignment="Center">
+                                                        </TextBlock>
+                                                        <Grid
+                                                            HorizontalAlignment="Right">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Image Width="10" Height="10"
+                                                                   Source="ms-appx:///Assets/Arrow_big_two_way_up_down_125px_1197969_easyicon.net.png">
+                                                            </Image>
+                                                            <TextBlock Grid.Column="1" Text="{x:Bind AddView}"></TextBlock>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>

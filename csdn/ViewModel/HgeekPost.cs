@@ -17,6 +17,11 @@ namespace csdn.ViewModel
             Frame.Navigate(typeof(View.CsdnProgressPage));
         }
 
+        public void NagivateGeek()
+        {
+            Frame.Navigate(typeof(View.ConeHtCsdnPage));
+        }
+
         public Frame Frame
         {
             set;

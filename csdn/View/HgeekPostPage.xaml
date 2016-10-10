@@ -46,7 +46,8 @@
                 <SplitView.Pane>
                     <Grid>
                         <StackPanel>
-                            <Button Style="{StaticResource SplitButton}">
+                            <Button Style="{StaticResource SplitButton}"
+                                    Click="{x:Bind View.NagivateGeek}">
                                 <Button.Content>
                                     <Grid>
                                         <StackPanel Style="{StaticResource SplitStackPanel}">

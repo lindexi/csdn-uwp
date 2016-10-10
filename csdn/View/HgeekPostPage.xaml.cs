@@ -31,6 +31,7 @@ namespace csdn.View
             View = new HgeekPost();
             this.InitializeComponent();
             View.Frame = frame;
+            View.NagivatePost();
         }
 
         private HgeekPost View

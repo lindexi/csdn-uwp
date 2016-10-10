@@ -8,6 +8,7 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Newtonsoft.Json;
 
+
 namespace csdn.ViewModel
 {
     public class ViewModel : NotifyProperty
@@ -61,6 +62,11 @@ namespace csdn.ViewModel
             catch (Exception)
             {
                 PostCsdn = new Neti();
+            }
+
+            if (PostCsdn == null)
+            {
+                PostCsdn=new Neti();
             }
         }
 

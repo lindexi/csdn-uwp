@@ -17,6 +17,7 @@ namespace csdn.ViewModel
         {
             Application.Current.Suspending += OnSuspending;
             Read();
+            
         }
 
         ~ViewModel()

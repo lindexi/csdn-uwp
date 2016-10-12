@@ -209,3 +209,8 @@ ModelManifest.xml
 .fake/
 /csdn/_pkginfo.txt
 *.appx
+*.db
+/.vs/config/applicationhost.config
+/csdn/project.lock.json
+/csdn/Neti.cs
+*.cs

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
+using csdn.View;
 
 namespace csdn.ViewModel
 {
@@ -20,6 +21,11 @@ namespace csdn.ViewModel
         public void NagivateGeek()
         {
             Frame.Navigate(typeof(View.ConeHtCsdnPage));
+        }
+
+        public void NagivateKaran()
+        {
+            Frame.Navigate(typeof(BoleslavPage));
         }
 
         public Frame Frame

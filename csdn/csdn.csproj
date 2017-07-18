@@ -123,6 +123,12 @@
     <Compile Include="View\HgeekPostPage.xaml.cs">
       <DependentUpon>HgeekPostPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\KaranPage.xaml.cs">
+      <DependentUpon>KaranPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BoleslavPage.xaml.cs">
+      <DependentUpon>BoleslavPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -137,6 +143,7 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\close_64px_1199468_easyicon.net.png" />
     <Content Include="Assets\csdn.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
@@ -203,6 +210,14 @@
     <Page Include="View\HgeekPostPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\KaranPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BoleslavPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup />

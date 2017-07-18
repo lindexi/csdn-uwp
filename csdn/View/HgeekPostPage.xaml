@@ -60,6 +60,19 @@
                             </Button>
 
                             <Button Style="{StaticResource SplitButton}"
+                                    Click="{x:Bind View.NagivateKaran}">
+                                <Button.Content>
+                                    <Grid>
+                                        <StackPanel Style="{StaticResource SplitStackPanel}">
+                                            <TextBlock Style="{StaticResource SplitFe}"
+                                                       Text="&#xE8C8;" />
+                                            <TextBlock Text="关注的博客" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+
+                            <Button Style="{StaticResource SplitButton}"
                                     Click="{x:Bind View.NagivatePost}">
                                 <Button.Content>
                                     <StackPanel Style="{StaticResource SplitStackPanel}">

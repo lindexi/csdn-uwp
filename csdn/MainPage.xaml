@@ -6,9 +6,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:view="using:csdn.View"
+    xmlns:system="using:System"
+    xmlns:objectModel="using:System.Collections.ObjectModel"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-       <Frame SourcePageType="view:HgeekPostPage"></Frame>
+        <FrameworkElement.Resources>
+            <!--<objectModel:ObservableCollection x:TypeArguments="local:Post" x:Key="Collection">
+                <local:Post Title="lindexi" Time="1"></local:Post>
+                <local:Post Title="csdn" Time="2"></local:Post>
+                <local:Post Title="博客" Time="3"></local:Post>
+            </objectModel:ObservableCollection>-->
+            <CollectionViewSource x:Key="Collection" >
+              
+            </CollectionViewSource>
+        </FrameworkElement.Resources>
+       <!--<Frame SourcePageType="view:HgeekPostPage"></Frame>-->
+        <ListView d:Source="{x:Bind ObservableCollection}">
+            <DataTemplate x:DataType="local:Post">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{x:Bind Title}"></TextBlock>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Time}"></TextBlock>
+                </Grid>
+            </DataTemplate>
+        </ListView>
     </Grid>
 </Page>

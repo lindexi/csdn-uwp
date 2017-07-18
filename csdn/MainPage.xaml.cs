@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,6 +26,21 @@ namespace csdn
         public MainPage()
         {
             this.InitializeComponent();
+            
         }
+
+        public ObservableCollection<Post> ObservableCollection { get; set; }=new ObservableCollection<Post>()
+        {
+            new Post()
+            {
+                Title = "lindexi",
+                Time="1"
+            },
+            new Post()
+            {
+                Title = "csdn",
+                Time="2",
+            }
+        };
     }
 }

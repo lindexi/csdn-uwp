@@ -112,6 +112,7 @@
     <Compile Include="ViewModel\NotifyProperty.cs" />
     <Compile Include="ViewModel\viewModel.cs" />
     <Compile Include="Model\AppId.cs" />
+    <Compile Include="View\Account.cs" />
     <Compile Include="View\ConeHtCsdnPage.xaml.cs">
       <DependentUpon>ConeHtCsdnPage.xaml</DependentUpon>
     </Compile>

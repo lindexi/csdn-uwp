@@ -19,6 +19,8 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.Web.Http.Filters;
 using csdn.ViewModel;
+using HtmlAgilityPack;
+
 //using Newtonsoft.Json; 
 
 namespace csdn
@@ -287,7 +289,7 @@ namespace csdn
             filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
             request.BeginGetResponse(result =>
             {
-                HttpWebRequest http = (HttpWebRequest)result.AsyncState;
+                HttpWebRequest http = (HttpWebRequest) result.AsyncState;
                 WebResponse webResponse = http.EndGetResponse(result);
                 webResponse.Dispose();
                 i++;
@@ -305,7 +307,7 @@ namespace csdn
                 filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
                 request.BeginGetResponse(result =>
                 {
-                    HttpWebRequest http = (HttpWebRequest)result.AsyncState;
+                    HttpWebRequest http = (HttpWebRequest) result.AsyncState;
                     WebResponse webResponse = http.EndGetResponse(result);
                     webResponse.GetResponseStream().ReadByte();
                     webResponse.Dispose();
@@ -418,7 +420,7 @@ namespace csdn
 
         private void ResponseCallBack(IAsyncResult result)
         {
-            HttpWebRequest http = (HttpWebRequest)result.AsyncState;
+            HttpWebRequest http = (HttpWebRequest) result.AsyncState;
             WebResponse webResponse = http.EndGetResponse(result);
             using (Stream stream = webResponse.GetResponseStream())
             {
@@ -535,38 +537,47 @@ namespace csdn
 
             List<Post> post = new List<Post>();
 
-            foreach (Match temp in match)
+            var doc = new HtmlDocument();
+            doc.LoadHtml(content);
+            foreach (var temp in doc.DocumentNode.Descendants("div")
+                .Where(temp => temp.GetAttributeValue("class", "") == "list_item list_view"))
             {
-                var original = temp.Groups[1].Value;
-                var url = "/" + temp.Groups[2].Value + "/article/details/" + temp.Groups[3].Value;
-                var title = temp.Groups[4].Value.Replace("\r", "").Replace("\n", "").Trim();
-                var timePost = temp.Groups[5].Value;
-                var linkView = temp.Groups[6].Value;
-
-                if (original == "ico_type_Original")
-                {
-                    original = "原";
-                }
-                else if (original == "ico_type_Translated")
-                {
-                    original = "翻";
-                }
-                else
-                {
-                    original = "转";
-                }
-
-                post.Add(new Post()
-                {
-                    Original = original,
-                    Url = url,
-                    Title = title,
-                    Time = timePost,
-                    LinkView = linkView,
-                    AddView = 0,
-                    LastTime = time
-                });
+                post.Add(Eadwulf(temp));
             }
+
+
+            //foreach (Match temp in match)
+            //{
+            //    var original = temp.Groups[1].Value;
+            //    var url = "/" + temp.Groups[2].Value + "/article/details/" + temp.Groups[3].Value;
+            //    var title = temp.Groups[4].Value.Replace("\r", "").Replace("\n", "").Trim();
+            //    var timePost = temp.Groups[5].Value;
+            //    var linkView = temp.Groups[6].Value;
+
+            //    if (original == "ico_type_Original")
+            //    {
+            //        original = "原";
+            //    }
+            //    else if (original == "ico_type_Translated")
+            //    {
+            //        original = "翻";
+            //    }
+            //    else
+            //    {
+            //        original = "转";
+            //    }
+
+            //    post.Add(new Post()
+            //    {
+            //        Original = original,
+            //        Url = url,
+            //        Title = title,
+            //        Time = timePost,
+            //        LinkView = linkView,
+            //        AddView = 0,
+            //        LastTime = time
+            //    });
+            //}
 
             //\s{0,}
             await DispatcherPost(post);
@@ -586,6 +597,26 @@ namespace csdn
             //{
             //    Timeout = new TimeSpan(1000)
             //};
+        }
+
+        private Post Eadwulf(HtmlNode doc)
+        {
+            var t = doc.Descendants("div").Where(temp => temp.GetAttributeValue("class", "") == "article_title").FirstOrDefault();
+
+            var original = t.Descendants("span").First().GetAttributeValue("span", "");
+            var witek = t.Descendants("a").First();
+
+            var title = witek.InnerText;
+            var url = witek.GetAttributeValue("href", "");
+
+            var timePost = Eadwulf(doc, "span", "class", "link_postdate");
+            //    var linkView = temp.Groups[6].Value;
+            return null;
+        }
+
+        private HtmlNode Eadwulf(HtmlNode doc, string descendants, string at, string witek)
+        {
+            return doc.Descendants(descendants).Where(temp => temp.GetAttributeValue(at, "") == witek).FirstOrDefault();
         }
 
         private async Task DispatcherPost(IEnumerable<Post> post)
@@ -614,10 +645,6 @@ namespace csdn
             }
             else
             {
-                //await Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                //{
-                //    PostCollection.Add(post);
-                //});
                 await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                     () =>
                     {

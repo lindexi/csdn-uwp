@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  csdn:
+    image: csdn
+    build:
+      context: .\csdn
+      dockerfile: Dockerfile

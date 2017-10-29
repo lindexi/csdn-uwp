@@ -1,4 +1,4 @@
-﻿namespace csdn.View
+﻿namespace csdn.Model
 {
     public class Account
     {

@@ -94,7 +94,11 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
     <None Include="csdn_StoreKey.pfx" />
+    <None Include="Dockerfile" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -112,7 +116,7 @@
     <Compile Include="ViewModel\NotifyProperty.cs" />
     <Compile Include="ViewModel\viewModel.cs" />
     <Compile Include="Model\AppId.cs" />
-    <Compile Include="View\Account.cs" />
+    <Compile Include="Model\Account.cs" />
     <Compile Include="View\ConeHtCsdnPage.xaml.cs">
       <DependentUpon>ConeHtCsdnPage.xaml</DependentUpon>
     </Compile>
@@ -131,6 +135,7 @@
     <Compile Include="View\BoleslavPage.xaml.cs">
       <DependentUpon>BoleslavPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\LicyvgAstgzModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -223,6 +228,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup />
+  <Import Project="..\..\uwp\uwp\src\Framework\Framework\Framework.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

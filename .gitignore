@@ -214,3 +214,6 @@ ModelManifest.xml
 /csdn/project.lock.json
 /csdn/Neti.cs
 *.cs
+.vs
+/csdn/csdn.nuget.props
+/csdn/csdn.nuget.targets

@@ -108,6 +108,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\LogCsdn.cs" />
     <Compile Include="Model\Neti.cs" />
     <Compile Include="Model\Post.cs" />
     <Compile Include="Model\Scrutiny.cs" />
